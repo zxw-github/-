@@ -42,8 +42,8 @@ int main(void)
     LinkList L;
     // HeadInsert(L);
     TailInsert(L);
-    // test_Insert(L);
-    test_Del(L);
+    test_Insert(L);
+    // test_Del(L);
     // test_Modify(L);
     // test_Find(L);
     // test_Search(L);
@@ -65,7 +65,6 @@ void HeadInsert(LinkList &L)
 {
     int x;//需要插入的元素的值
     L=(LinkList)malloc(sizeof(LNode)); //头结点
-    L->next=NULL;
     L->next=NULL;//初始为空 
     // while(scanf("%d",&x))
     // {
@@ -109,32 +108,23 @@ void TailInsert(LinkList &L)
 //插入结点
 bool InsterLink(LinkList &L,int i,ElemType e)
 {
-    //在单链表的第i个位置后插入元素e
-    //1，判断插入的位置是否合法
-    //遍历单链表的元素个数
-    int count=0;
-    LinkList H=L;
-    while(H !=NULL)
+    int j=1;
+    LinkList p=L;
+    LinkList s;
+    while(p && j<i)
     {
-        H=H->next;
-        count++;
+        p=p->next;
+        ++j;
     }
-    //判断
-    if(i<1 || i>count+1)
+    if(!p || j>i)
     {
         return false;
     }
-    //若插入位置合法
-    LinkList s= (LinkList)malloc(sizeof(LNode)); //插入结点
+    //插入
+    s=(LinkList)malloc(sizeof(LNode));
     s->data=e;
-    LinkList p=L->next;
-    while(--i)
-    {
-        p=p->next;
-    }
-    //开始插入,p指向带插入到的位置
-    s->next = p;
-    p->next=p;
+    s->next=p->next;
+    p->next=s;
     return true;
 }
 //测试插入
