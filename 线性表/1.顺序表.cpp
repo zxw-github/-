@@ -1,15 +1,25 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MaxSize 20
 typedef int ElemType;
-//静态定义
-typedef struct {
-    ElemType data[MaxSize];
+// //静态定义
+// typedef struct {
+//     ElemType data[MaxSize];
+//     int length;
+// }SqList;
+
+//动态定义
+typedef struct 
+{
+    ElemType *data;
     int length;
 }SqList;
 
 //初始化顺序表
 void InitSqList(SqList &L);
+//动态初始化顺序表
+void InitSeqList(SqList &L);
 //打印顺序表
 void PrintSqList(SqList &L);
 //顺序表的插入
@@ -31,16 +41,17 @@ void test_Find(SqList L);
 int main(void)
 {
     SqList L; //定义顺序表
-    InitSqList(L);//初始化顺序表
+    // InitSqList(L);//初始化顺序表
+    InitSeqList(L);
     // test_Insert(L);//测试插入
     // test_del(L);//测试删除
     // test_Modify(L);
-    // test_Find(L);//测试查询
+    test_Find(L);//测试查询
 
     return 0;
 }
 
-//初始化顺序表
+//静态初始化顺序表
 void InitSqList(SqList &L)
 {
     // int num=0;
@@ -49,6 +60,19 @@ void InitSqList(SqList &L)
     // {
     //     L.data[L.length++]=num;
     // }
+
+    //静态定义
+    L.data[0]=1;
+    L.data[1]=2;
+    L.data[2]=3;
+    L.data[3]=4;
+    L.length=4;
+
+}
+//动态初始化顺序表
+void InitSeqList(SqList &L)
+{
+    L.data = (ElemType *) malloc(MaxSize*sizeof(SqList));
     L.data[0]=1;
     L.data[1]=2;
     L.data[2]=3;
@@ -83,8 +107,19 @@ void test_Insert(SqList L)
 bool InsertSqList(SqList &L,int i,ElemType e)
 {
     //在顺序表的第i个元素的位置（下标为i-1）插入元素e
-    //判断插入的位置是否合法
-    if(i<1 || i>L.length)
+    // //判断顺序表是否已满
+    // if(L.length == MaxSize)
+    // {
+    //     return false;
+    // }
+    // //判断插入的位置是否合法
+    // if(i<1 || i>L.length)
+    // {
+    //     return false;
+    // }
+
+    //判断插入是否合法
+    if(L.length==MaxSize || i<1 || i>L.length+1)
     {
         return false;
     }
@@ -171,7 +206,7 @@ void test_Find(SqList L)
         printf("查询失败\n");
     }else{
         printf("查询成功\n");
-        printf("查询到的位置是%d\n",ret);
+        printf("查询元素位置是%d\n",ret);
     }
 }
 //顺序表的查询

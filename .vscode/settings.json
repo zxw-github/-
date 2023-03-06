@@ -1,0 +1,18 @@
+{
+    //主题
+    "workbench.colorTheme": "One Dark Pro Darker",
+    //Code Runner配置
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+
+    //Prettier-Code formatter配置
+    "prettier.prettierPath": "./node_modules/prettier",
+    "files.autoSave": "onFocusChange",
+    "prettier.requireConfig": true,
+    "editor.formatOnSave": true,
+    "prettier.withNodeModules": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    }
+}
