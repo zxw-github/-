@@ -14,5 +14,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[c]": {
         "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
     }
 }
